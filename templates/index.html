@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Management</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Customer Management</h1>
+    
+    <h2>Add Customer</h2>
+    <form method="POST" action="/add_customer">
+        <label for="reference">Reference:</label>
+        <input type="text" name="reference" required><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" required><br><br>
+
+        <label for="initial_problem">Initial Problem:</label>
+        <input type="text" name="initial_problem" required><br><br>
+
+        <input type="submit" value="Add Customer">
+    </form>
+
+    <h2>Customer List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Reference</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Problems</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.reference }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.phone_number }}</td>
+                <td>{{ customer.view_problems() }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Log to Excel</h2>
+    <a href="/log_to_excel">Log Customer Data to Excel</a>
+</body>
+</html>
